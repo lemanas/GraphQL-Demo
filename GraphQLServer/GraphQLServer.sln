@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQLServer", "GraphQLServer\GraphQLServer.csproj", "{D467B620-EF43-4FD6-9D7E-83778D109E38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.Domain", "GraphQL.Domain\GraphQL.Domain.csproj", "{75936041-582C-4700-A294-1600FC8086BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.DataAcess", "GraphQL.DataAcess\GraphQL.DataAcess.csproj", "{05141495-6187-4438-92EB-850E5FCCBA45}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D467B620-EF43-4FD6-9D7E-83778D109E38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D467B620-EF43-4FD6-9D7E-83778D109E38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D467B620-EF43-4FD6-9D7E-83778D109E38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D467B620-EF43-4FD6-9D7E-83778D109E38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75936041-582C-4700-A294-1600FC8086BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75936041-582C-4700-A294-1600FC8086BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75936041-582C-4700-A294-1600FC8086BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75936041-582C-4700-A294-1600FC8086BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05141495-6187-4438-92EB-850E5FCCBA45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05141495-6187-4438-92EB-850E5FCCBA45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05141495-6187-4438-92EB-850E5FCCBA45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05141495-6187-4438-92EB-850E5FCCBA45}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

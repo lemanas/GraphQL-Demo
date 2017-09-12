@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>FParsec-Pipes</name></assembly>
+<members>
+<member name="M:FParsec.Pipes.DefaultParsers.precursive``2(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.FSharpFunc{FParsec.CharStream{``1},FParsec.Reply{``0}},Microsoft.FSharp.Core.FSharpFunc{FParsec.CharStream{``1},FParsec.Reply{``0}}})">
+<summary>
+ Defines a self-referential parser given `defineParser`, which returns a parser given its own output parser.
+ The parser that will be passed to `defineParser` is a `createParserForwardedToRef()` pointed at a reference
+ that will be assigned to `defineParser`&apos;s output.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.DefaultParsers.op_Splice``3(``0)">
+<summary>
+ Prefix operator equivalent to `defaultParser x`.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.DefaultParsers.op_SpliceUntyped``8(``0)">
+<summary>
+ Creates a pipe starting with `parser`. Shorthand for `pipe -- parser`.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.DefaultParsers.op_MinusQmark``10(FParsec.Pipes.Pipes.Pipe{``0,``0,``1,``2,``3},``4)">
+<summary>
+ Chains `parser` onto `pipe`, with backtracking if `pipe` fails prior to `parser`
+ or `parser` fails without changing the parser state.
+ `parser` will be converted to a parser and may be captured or ignored based
+ on whether `+.` was used on it.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.DefaultParsers.op_QmarkMinus``10(FParsec.Pipes.Pipes.Pipe{``0,``0,``1,``2,``3},``4)">
+<summary>
+ Chains `parser` onto `pipe`, with backtracking if `pipe` fails prior to `parser`.
+ `parser` will be converted to a parser and may be captured or ignored based
+ on whether `+.` was used on it.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.DefaultParsers.op_MinusMinus``10(FParsec.Pipes.Pipes.Pipe{``0,``1,``2,``3,``4},``5)">
+<summary>
+ Chains `parser` onto `pipe`.
+ `parser` will be converted to a parser and may be captured or ignored based
+ on whether `+.` was used on it.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.DefaultParsers.op_TwiddlePlusDot``3(``0)">
+<summary>
+ Converts its argument to a parser via `defaultParser` and
+ marks the result as a captured input, which can be consumed
+ by the function at the end of a pipe.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.DefaultParsers.defaultParser``3(``0)">
+<summary>
+ Create a parser from `x`, if there is a single sensible parser possible.
+ For example, `defaultParser &quot;str&quot;` is equivalent to `pstring str`.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.DefaultParsers.p``1">
+<summary>
+ Represents the default parser for the given type.
+ If the type `&apos;a` has a default parser implemented, `p&lt;&apos;a&gt;`
+ can be converted to a `Parser&lt;&apos;a, &apos;u&gt;` with the % operator,
+ e.g. `%p&lt;int&gt;`.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.DefaultParsers.ci``1(``0)">
+<summary>
+ Mark `x` as being case insensitive.
+ Useful for use with `%`. For example `%ci &quot;test&quot;` is equivalent
+ to `pstringCI &quot;test&quot;`, while `%&quot;test&quot;` is equivalent to `pstring &quot;test&quot;`.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.DefaultParsers.pcharCI``1(System.Char)">
+<summary>
+ Parse a character case insensitively. Returns the parsed character.
+</summary>
+</member>
+<member name="T:FParsec.Pipes.Pipes.DefaultEnding">
+<summary>
+ A marker type which implements the default function to terminate a pipe
+ of a given arity (up to 5).
+</summary>
+</member>
+<member name="M:FParsec.Pipes.Pipes.Pipe`5.op_MinusPercentGreater``1(FParsec.Pipes.Pipes.Pipe{``0,``0,`2,`3,`4},`2)">
+<summary>
+ Provide the pipe with the function it requires to become a parser.
+</summary>
+</member>
+<member name="T:FParsec.Pipes.Pipes.Pipe`5">
+<summary>
+ Represents a chain of parsers that can be converted to a single parser,
+ if given a value of type `&apos;fn`. `&apos;fn` is typically a function
+ that takes the captured inputs accumulated by the parser chain
+ and combines them into a single output.
+</summary>
+</member>
+<member name="P:FParsec.Pipes.Pipes.IPipeLink`3.ToFunctionParser">
+<summary>
+ Convert to a `Parser&lt;&apos;inp -&gt; &apos;out, &apos;u&gt;`. This defers the
+ requirement of an `&apos;inp` value to after parsing, rather than
+ before creating the parser.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.Pipes.IPipeLink`3.ToOutputParser(`0)">
+<summary>
+ Create a `Parser&lt;&apos;out, &apos;u&gt;` from an `&apos;inp` value.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.Pipes.IPipeLink`3.LinkUp``1(Microsoft.FSharp.Core.FSharpFunc{FParsec.CharStream{`2},FParsec.Reply{``0}})">
+<summary>
+ Given a parser to a precede this, produce an `IPipeLink` whose `&apos;inp` type is
+ a function going from the preceding parser&apos;s output to our `&apos;inp`.
+ This lets us build an `IPipeLink` requiring an `a -&gt; b -&gt; c -&gt; d`
+ from a chain of `parseA`, `parseB`, `parseC`, working right-to-left.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.Pipes.IPipeLink`3.IgnoreUp``1(Microsoft.FSharp.Core.FSharpFunc{FParsec.CharStream{`2},FParsec.Reply{``0}})">
+<summary>
+ Produce an `IPipeLink` that will run the given parser prior to this one&apos;s
+ and ignore its output.
+</summary>
+</member>
+<member name="T:FParsec.Pipes.Pipes.IPipeLink`3">
+<summary>
+ Represents the right side of a pipeline, which can become a `Parser&lt;&apos;out,&apos;u&gt;`
+ if given a value of type `&apos;inp`. Practically speaking, `&apos;inp` is typically
+ a function combining the outputs of the captured parsers constituting this pipe section.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.Pipes.op_MinusBarGreater``4(FParsec.Pipes.Pipes.Pipe{``0,``0,``1,``2,``3},``1)">
+<summary>
+ Provide the pipe with the function it requires to become a parser.
+ In most cases this operator is equivalent to `-%&gt;`.
+ However, `-|&gt;` is not overloaded so `pipe -|&gt; auto` does not work.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.Pipes.op_MinusMinusBarGreater``6(FParsec.Pipes.Pipes.Pipe{``0,``0,``1,``2,``3},``1)">
+<summary>
+ Supply a function partway through a pipe that combines the
+ captured inputs preceding it.
+ This operator is rarely useful.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.Pipes.op_MinusMinusLessBar``6(FParsec.Pipes.Pipes.Pipe{Microsoft.FSharp.Core.FSharpFunc{``0,``1},``1,``2,``3,``4},``5)">
+<summary>
+ Supply a function partway through a pipe that combines the
+ captured inputs following it.
+ This operator is virtually never useful and is included only for symmetry.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.Pipes.appendIgnoreBacktrackRight``6(FParsec.Pipes.Pipes.Pipe{``0,``0,``1,``2,``3},Microsoft.FSharp.Core.FSharpFunc{FParsec.CharStream{``3},FParsec.Reply{``4}})">
+<summary>
+ Append a parser to a pipe, ignoring its output, with backtracking
+ up to the point that the added parser has consumed input.
+ If the parsers before this one in the pipe fail, even after changing the parser state,
+ or if the added parser fails before changing the parser state, the entire pipe will
+ be backtracked.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.Pipes.appendCaptureBacktrackRight``6(FParsec.Pipes.Pipes.Pipe{``0,``0,``1,Microsoft.FSharp.Core.FSharpFunc{``2,``3},``4},Microsoft.FSharp.Core.FSharpFunc{FParsec.CharStream{``4},FParsec.Reply{``2}})">
+<summary>
+ Append a parser to a pipe, capturing its output, with backtracking
+ up to the point that the added parser has consumed input.
+ If the parsers before this one in the pipe fail, even after changing the parser state,
+ or if the added parser fails before changing the parser state, the entire pipe will
+ be backtracked.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.Pipes.appendIgnoreBacktrackLeft``6(FParsec.Pipes.Pipes.Pipe{``0,``0,``1,``2,``3},Microsoft.FSharp.Core.FSharpFunc{FParsec.CharStream{``3},FParsec.Reply{``4}})">
+<summary>
+ Append a parser to a pipe, ignoring its output, with backtracking
+ up to the point that the added parser runs.
+ If the parsers before this one in the pipe fail, even after changing
+ the parser state, the entire pipe will be backtracked.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.Pipes.appendCaptureBacktrackLeft``6(FParsec.Pipes.Pipes.Pipe{``0,``0,``1,Microsoft.FSharp.Core.FSharpFunc{``2,``3},``4},Microsoft.FSharp.Core.FSharpFunc{FParsec.CharStream{``4},FParsec.Reply{``2}})">
+<summary>
+ Append a parser to a pipe, capturing its output, with backtracking
+ up to the point that the added parser runs.
+ If the parsers before this one in the pipe fail, even after changing
+ the parser state, the entire pipe will be backtracked.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.Pipes.appendIgnore``6(FParsec.Pipes.Pipes.Pipe{``0,``1,``2,``3,``4},Microsoft.FSharp.Core.FSharpFunc{FParsec.CharStream{``4},FParsec.Reply{``5}})">
+<summary>
+ Append a parser to a pipe, ignoring its output.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.Pipes.appendCapture``6(FParsec.Pipes.Pipes.Pipe{Microsoft.FSharp.Core.FSharpFunc{``0,``1},``2,``3,``4,``5},Microsoft.FSharp.Core.FSharpFunc{FParsec.CharStream{``5},FParsec.Reply{``0}})">
+<summary>
+ Append a parser to a pipe, capturing its output.
+</summary>
+</member>
+<member name="M:FParsec.Pipes.Pipes.pipe``3">
+<summary>
+ The starting (leftmost) value of any `Pipe`.
+ This contains no parsers, so if terminated immediately, it will `preturn`
+ the value supplied as a terminator.
+</summary>
+</member>
+<member name="P:FParsec.Pipes.Pipes.auto">
+<summary>
+ A marker value which serves as the default function to terminate a pipe.
+ When found on the right side of the `-%&gt;` operator, this behaves equivalently
+ to the most appropriate function for the pipe&apos;s arity - producing unit, a single
+ value, or an n-tuple (up to n=5).
+</summary>
+</member>
+<member name="M:FParsec.Pipes.Pipes.collapse``4(FParsec.Pipes.Pipes.IPipeLink{``0,``1,``2},``0)">
+<summary>
+ Given the input to the `IPipeLink` we have right now, get a new `IPipeLink` expecting a function
+ that does something with the output of our link. This lets us map functions onto the eventual
+ materialized parser with `|&gt;&gt;`.
+</summary>
+</member>
+<member name="P:FParsec.Pipes.Precedence.FastOperatorTable`2.PrefixOperator">
+<summary>
+ Parses any prefix operator and trailing whitespace, if any.
+</summary>
+</member>
+<member name="P:FParsec.Pipes.Precedence.FastOperatorTable`2.TrailingOperators">
+<summary>
+ Array indexed by minimum precedence.
+ Value at `[i]` is a parser that will consume any infix or suffix operator of at least `i` precedence,
+ consuming trailing whitespace, if any.
+</summary>
+</member>
+<member name="P:FParsec.Pipes.Precedence.FastOperatorTable`2.Term">
+<summary>
+ Function which, given the overall expression parser,
+ will produce the parser for a simple term (i.e. literal, ident, or parenthesized subexpr).
+ Consumes trailing whitespace, if any.
+</summary>
+</member>
+<member name="P:FParsec.Pipes.Precedence.OperatorTable`2.Operators">
+<summary>
+ All suppported operators, from highest to lowest precedence (i.e. multiplication before addition).
+ Operators in the same sub-list have equal precedence.
+</summary>
+</member>
+<member name="P:FParsec.Pipes.Precedence.OperatorTable`2.Whitespace">
+<summary>
+ Whitespace/comments which may optionally appear between each term in an expression.
+</summary>
+</member>
+<member name="P:FParsec.Pipes.Precedence.OperatorTable`2.Term">
+<summary>
+ Function which, given the overall expression parser,
+ will produce the parser for a simple term (i.e. literal, ident, or parenthesized subexpr).
+ Does not need to consume trailing whitespace.
+</summary>
+</member>
+</members>
+</doc>

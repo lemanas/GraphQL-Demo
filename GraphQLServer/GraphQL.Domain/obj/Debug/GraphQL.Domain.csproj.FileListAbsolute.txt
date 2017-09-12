@@ -1,0 +1,5 @@
+E:\Work\Projects\Training projects\GraphQLDemo\GraphQLServer\GraphQL.Domain\bin\Debug\GraphQL.Domain.dll
+E:\Work\Projects\Training projects\GraphQLDemo\GraphQLServer\GraphQL.Domain\bin\Debug\GraphQL.Domain.pdb
+E:\Work\Projects\Training projects\GraphQLDemo\GraphQLServer\GraphQL.Domain\obj\Debug\GraphQL.Domain.csprojResolveAssemblyReference.cache
+E:\Work\Projects\Training projects\GraphQLDemo\GraphQLServer\GraphQL.Domain\obj\Debug\GraphQL.Domain.dll
+E:\Work\Projects\Training projects\GraphQLDemo\GraphQLServer\GraphQL.Domain\obj\Debug\GraphQL.Domain.pdb
