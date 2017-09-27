@@ -65,8 +65,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Schema.cs" />
     <Compile Include="ServerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\DatapointType.cs" />
+    <Compile Include="Types\UserType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -78,5 +81,6 @@
       <Name>GraphQL.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
